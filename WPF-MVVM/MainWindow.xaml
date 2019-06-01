@@ -1,0 +1,87 @@
+﻿<Window x:Class="WPF_MVVM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_MVVM"
+        xmlns:controls="clr-namespace:WPF_MVVM.Controls"
+        xmlns:vm="clr-namespace:WPF_MVVM.ViewModels" 
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" DataContext="{StaticResource TodosVM}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Border BorderBrush="Navy" BorderThickness="1">
+            <WrapPanel Grid.Column="0" Background="AliceBlue">
+                <ListBox Name="TodosListView" ItemsSource="{Binding Todos}" Width="592" ScrollViewer.CanContentScroll="False">
+                    <ListBox.ItemTemplate>
+                        <ItemContainerTemplate>
+                            <StackPanel>
+                                <TextBlock>
+                                    <Run Text="Lokacja: "/>
+                                    <Run Text="{Binding Name}"/>
+                                </TextBlock>
+                                <TextBlock>
+                                    <Run Text="Temperatura: "/>
+                                    <Run Text="{Binding NumberOfParticipants}"/>
+                                    <Run Text="°C"/>
+                                    <Image Source="http://cdn.apixu.com/weather/64x64/day/116.png"/>
+                                </TextBlock>
+                                <TextBlock>
+                                    <Run Text="Czas pomiaru: "/>
+                                    <Run Text="{Binding Beginning}"/>
+                                </TextBlock>
+                                <TextBlock>
+                                    <Run Text="Predkosc wiatru: "/>
+                                    <Run Text="{Binding Wind_kph}"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </ItemContainerTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </WrapPanel>
+        </Border>
+        <Grid Name="Test" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel >
+                <TextBlock TextAlignment="Center">Add panel</TextBlock>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" >Miasto</TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="0" >Ilosc Dni</TextBlock>
+                    <TextBox Grid.Row="0" Grid.Column="1" Name="InputTodoName"></TextBox>
+                    <TextBox Grid.Row="1" Grid.Column="1" Name="InputTodoNumberOfParticipants"></TextBox>
+                </Grid>
+
+                <!--<Button Click="AddButton_Click" IsEnabled="{Binding Text, ElementName=InputTodoNumberOfParticipants, Converter={StaticResource IsIntToEnabledConverter}}">Add</Button>-->
+                <Button Click="AddButtonFromWeb_Click">Sprawdz pogode</Button>
+            </StackPanel>
+            <StackPanel Grid.Row="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                        <Button Width="66" Click="AddOneParticipantButton_Click" Content="Save" />
+                        <Button Width="66" Click="LoadButton_Click" Content="Load"/>
+                        <Button Width="66" Click="DetailsButton_Click" Content="Details"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
